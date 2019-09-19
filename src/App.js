@@ -24,7 +24,6 @@ class App extends React.Component {
       axios
         .get('/sessions', { headers: { 'Authorization': `Bearer ${jwt}`}})
         .then(data => {
-          console.log(data)
           this.setState({ isLoggedIn: true })
         })
         .catch(error => {
