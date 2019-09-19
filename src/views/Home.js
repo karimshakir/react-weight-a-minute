@@ -1,16 +1,37 @@
 import React from 'react';
-import { Redirect } from "@reach/router";
+import axios from 'axios';
+import { navigate } from "@reach/router";
 
 class Home extends React.Component {
+   state = {
+    currentWeight: ''
+  }
 
-  submitWeight = () => {
-    console.log("submitWeight button is working")
-    return <Redirect to="profile" noThrow/>
+submitWeight = () => {
+    const value = this.state.currentWeight;
+    const jwt = localStorage.getItem('jwt')
+    axios
+      .post('/weights', { value: value }, { headers: { 'Authorization': `Bearer ${jwt}`}})
+      .then(data => {
+      navigate('profile')
+      }).catch(error => {
+        console.log(error)
+    })
+  }
 
+  handleChange = (event) => {
+    this.setState({ currentWeight:event.target.value })
   }
   render(){
-    return <button onClick={this.submitWeight}>Submit</button>
+    return (
+       <div>
+        <h1> Enter Weight </h1>
+        <input id="enter-weight" value={this.state.currentWeight} onChange={this.handleChange}/>
+        <button onClick={this.submitWeight}>Submit</button>
+      </div>
+    )
   }
 }
 
 export default Home
+ 

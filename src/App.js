@@ -30,7 +30,9 @@ class App extends React.Component {
         .catch(error => {
           this.setState({ isLoggedIn: false })
         })
-    } 
+    } else {
+      console.log("logged out")
+    }
   }
 
   login = () => {
@@ -50,8 +52,6 @@ class App extends React.Component {
   logout = () => {
     localStorage.clear();
     this.setState({ isLoggedIn: false });
-
-
   }
 
   render() {
@@ -61,8 +61,7 @@ class App extends React.Component {
         <nav>
           <Link to="/">Home</Link>
           <Link to="login">Login</Link>
-          <a onClick={this.logout}>Logout</a>
-
+          <button onClick={this.logout} >Logout</button>
 
         </nav>
         <Router>
@@ -75,5 +74,4 @@ class App extends React.Component {
   }
 }
 
-        
 export default App;

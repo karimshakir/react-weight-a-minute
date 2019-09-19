@@ -5,24 +5,31 @@ import axios from 'axios';
 
 
 class Profile extends React.Component{
-  render(){
-    return <h1>PROFILE PAGE</h1>
-  }
   state = {
     currentWeight: '',
     weightHistory: [],
     myTeams: [],
     errors: []
   }
-    getPlayerObject() {
+    getWeights() {
       axios
-        .get('/player/2' )
+        .get('/players' )
         .then(response => {
           console.log(response)
-        }).catch(error => {
-          this.setState({ errors: error.response.data.errors })
-      })
-    }
+      }).catch(error => {
+        console.log(error)
+    })
+  }
+  render(){
+    return (
+      <div>
+       <h1>PROFILE PAGE</h1>
+       <p>{this.response}</p>
+       <p>perfect!!</p>
+       <button onClick={this.getWeights}>Weights</button>
+       </div>
+    )
+  }
 }
 
 export default Profile;
