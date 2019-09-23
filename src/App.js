@@ -58,7 +58,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
+      
         <h1>WEIGHT - A - MINUTE</h1>
+
         <nav>
           <Link to="/">Home</Link>
           <Link to="/teams">Teams</Link>
@@ -80,9 +82,9 @@ class App extends React.Component {
 
           <PrivateRoute path='profile' 
             isLoggedIn={this.state.isLoggedIn} 
-            component={Profile} />
-            
+            component={Profile} />   
         </Router>
+
       </div>
     )
   }

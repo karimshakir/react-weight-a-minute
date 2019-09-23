@@ -9,7 +9,6 @@ class Profile extends React.Component{
     player: null,
     currentWeight: '',
     weightHistory: [],
-    myTeams: [],
     errors: [],
     showAllWeights: false
   }
@@ -35,8 +34,7 @@ class Profile extends React.Component{
         <h1>PROFILE PAGE</h1>
         <MostRecentWeight weights={this.state.player.weights} />
         <button onClick={this.toggleIndexWeights} >Weight History</button>
-        <Weights weights={this.state.player.weights} showAllWeights={this.state.showAllWeights} />
-        
+        <Weights weights={this.state.player.weights} showAllWeights={this.state.showAllWeights} />     
       </div>
             )
           }
