@@ -4,7 +4,7 @@ import { Redirect } from "@reach/router";
 class Login extends React.Component {
 
   render() {
-    console.log(this.props.isLoggedIn)
+    console.log("LoggedIn: " + this.props.isLoggedIn)
     if (this.props.isLoggedIn) {
     return <Redirect to='profile' noThrow />
     }
@@ -17,5 +17,6 @@ class Login extends React.Component {
     )
   }
 }
+
 
 export default Login;

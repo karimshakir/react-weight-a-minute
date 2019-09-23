@@ -2,9 +2,11 @@ import React from 'react';
 import Home from './views/Home';
 import Login from './views/Login';
 import Profile from './views/Profile';
+import Teams from './views/Teams'
 import { Router, Link, Redirect } from "@reach/router";
 import axios from 'axios';
 import './App.css';
+
 
 class PrivateRoute extends React.Component {
   render() {
@@ -14,7 +16,7 @@ class PrivateRoute extends React.Component {
 
 class App extends React.Component {
   state = {
-    isLoggedIn: false
+    isLoggedIn: false,
   }
 
   componentDidMount() {
@@ -59,17 +61,30 @@ class App extends React.Component {
         <h1>WEIGHT - A - MINUTE</h1>
         <nav>
           <Link to="/">Home</Link>
-          <Link to="login">Login</Link>
+          <Link to="/teams">Teams</Link>
           <button onClick={this.logout} >Logout</button>
-
         </nav>
+           
         <Router>
-          <PrivateRoute path='/' isLoggedIn={this.state.isLoggedIn} component={Home} />
-          <Login path="login" isLoggedIn={this.state.isLoggedIn} handleLogin={this.login} />
-          <Profile path="profile"/>
+          <Login path="login" 
+            isLoggedIn={this.state.isLoggedIn} 
+            handleLogin={this.login} />
+
+          <PrivateRoute path='teams'
+            isLoggedIn={this.state.isLoggedIn} 
+            component={Teams} />
+
+          <PrivateRoute path='/' 
+            isLoggedIn={this.state.isLoggedIn} 
+            component={Home} />
+
+          <PrivateRoute path='profile' 
+            isLoggedIn={this.state.isLoggedIn} 
+            component={Profile} />
+            
         </Router>
       </div>
-    );
+    )
   }
 }
 

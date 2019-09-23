@@ -1,48 +1,46 @@
 import React from 'react';
 import axios from 'axios';
-
-
-
+import Weights from '../components/Weights'
+import MostRecentWeight from '../components/MostRecentWeight'
 
 class Profile extends React.Component{
+
   state = {
-    test: "old value",
-    players: ["testing-1","testing-2","testing-3"],
+    player: null,
     currentWeight: '',
     weightHistory: [],
     myTeams: [],
-    errors: []
+    errors: [],
+    showAllWeights: false
   }
-    getWeights = () => {
-      axios
-        .get('/players' )
-        .then(response => {
-        this.setState({test:"new-value"})
-        this.setState({players: response.data.names})  
-      }).catch(error => {
-        console.log(error)
-    })
-}
 
-    getTesting = () => {
-      this.setState({test:"New Value"})
+  componentDidMount() {
+    const jwt = localStorage.getItem('jwt');
+    axios.get('/players', { headers: { 'Authorization': `Bearer ${jwt}`}})
+      .then(response => {
+        this.setState({ player: response.data })
+      })
+  }
+
+  toggleIndexWeights = () => {
+    this.setState({showAllWeights:!this.state.showAllWeights})
   }
 
   render(){
+    if (!this.state.player) {
+      return null;
+    }
     return (
       <div>
         <h1>PROFILE PAGE</h1>
-
-const listItems = players.map((player) =>
-  <li>{player}</li>
-
-
-
-       <button onClick={this.getWeights}>Weights</button>
-       <button onClick={this.getTesting}>Tester</button>
-       </div>
-    )
-  }
-}
-
+        <MostRecentWeight weights={this.state.player.weights} />
+        <button onClick={this.toggleIndexWeights} >Weight History</button>
+        <Weights weights={this.state.player.weights} showAllWeights={this.state.showAllWeights} />
+        
+      </div>
+            )
+          }
+        }
 export default Profile;
+
+

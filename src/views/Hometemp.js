@@ -18,7 +18,6 @@ class Home extends React.Component {
       }).catch(error => {
         console.log(error)
     })
-    console.log("submit weight button is working")
   }
 
   handleChange = (event) => {
