@@ -14,7 +14,6 @@ class Teams extends React.Component {
     const jwt = localStorage.getItem('jwt');
     axios.get('/teams', { headers: { 'Authorization': `Bearer ${jwt}`}})
       .then(response => {
-        console.log(response.data)
         this.setState({ teams: response.data})
       })
   }
@@ -25,7 +24,6 @@ class Teams extends React.Component {
     axios
       .post('/teams', { name: value }, { headers: { 'Authorization': `Bearer ${jwt}`}})
       .then(response => {
-        console.log(response)
         navigate('profile')
       }).catch(error => {
         console.log(error)
@@ -36,8 +34,9 @@ class Teams extends React.Component {
         const jwt = localStorage.getItem('jwt')
         axios
           .post('/enrollments', { team_id: theTeamId }, { headers: { 'Authorization': `Bearer ${jwt}`}})
-          .then(data => {
-          navigate('profile')
+          .then(response => {
+            console.log(response.data)
+          // navigate('profile')
           }).catch(error => {
             console.log(error)
         })
