@@ -7,6 +7,8 @@ function MyTeam (props) {
       return (
         <div key={i}>
             <p>{team.name}</p>
+            <button onClick={() => props.handleClick(team.id)}>Leave Team</button>
+
         </div>
       )
     }) : null
@@ -14,3 +16,4 @@ function MyTeam (props) {
 }
 
 export default MyTeam
+

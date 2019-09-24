@@ -24,13 +24,15 @@ class Profile extends React.Component{
       })
   }
 
-  // myTeams() {
-  //   const jwt = localStorage.getItem('jwt');
-  //   axios.get('/teams', { headers: { 'Authorization': `Bearer ${jwt}`}})
-  //     .then(response => {
-  //       this.setState({ player: response.data })
-  //     })
-  // }
+    leaveTeam = (theTeamId) => {
+        const jwt = localStorage.getItem('jwt')
+        axios
+          .delete('/enrollments/', { team_id: theTeamId }, '/delete',  { headers: { 'Authorization': `Bearer ${jwt}`}})
+          .then(data => {
+          }).catch(error => {
+            console.log(error)
+        })
+      }
 
   toggleIndexWeights = () => {
     this.setState({showAllWeights:!this.state.showAllWeights})
@@ -48,10 +50,17 @@ class Profile extends React.Component{
       <div>
         <h1>PROFILE PAGE</h1>
         <MostRecentWeight weights={this.state.player.weights} />
+
         <button onClick={this.toggleIndexWeights} >Weight History </button>
-        <Weights weights={this.state.player.weights} showAllWeights={this.state.showAllWeights} /> 
+
+        <Weights weights={this.state.player.weights}
+         showAllWeights={this.state.showAllWeights} /> 
+
         <button onClick={this.showMyTeams} >MyTeams</button>
-        <MyTeams showMyTeams={this.state.showMyTeams} myTeams={this.state.player.teams} />
+
+        <MyTeams handleClick={this.leaveTeam}
+           showMyTeams={this.state.showMyTeams}
+           myTeams={this.state.player.teams} />
       </div>
             )
           }
