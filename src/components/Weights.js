@@ -9,6 +9,7 @@ function Weights(props) {
           <p key={weight.id}> {weight.value} </p>
         )
       }
+      return null;
     }) :
     props.weights.map((weight, i) => {
       if (i > 0 && i < 3) {

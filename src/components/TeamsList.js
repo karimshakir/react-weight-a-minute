@@ -7,7 +7,10 @@ function TeamsList(props) {
     props.theTeams.map((theTeam, i) => {
       
         return (
-          <p key={theTeam.id}>{theTeam.name} </p>
+          <div key={theTeam.id}>
+            <p >{theTeam.name} </p>
+            <button onClick={() => props.handleClick(theTeam.id)}>Join Team</button>
+          </div>
         )
       }): <p>No existing Teams</p>
     )

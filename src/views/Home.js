@@ -21,6 +21,7 @@ submitWeight = () => {
 
   handleChange = (event) => {
     this.setState({ currentWeight:event.target.value })
+    console.log(event.target.value)
   }
   render(){
     return (
