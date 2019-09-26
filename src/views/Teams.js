@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import LeaderBoard from './LeaderBoard'
 import TeamsList from '../components/TeamsList'
 import { navigate } from "@reach/router";
 
@@ -24,11 +25,13 @@ class Teams extends React.Component {
     axios
       .post('/teams', { name: value }, { headers: { 'Authorization': `Bearer ${jwt}`}})
       .then(response => {
-        navigate('profile')
+        console.log(response.data)
       }).catch(error => {
         console.log(error)
     })
+      window.location.reload();
   }
+
 
     joinTeam = (theTeamId) => {
         const jwt = localStorage.getItem('jwt')
@@ -36,7 +39,6 @@ class Teams extends React.Component {
           .post('/enrollments', { team_id: theTeamId }, { headers: { 'Authorization': `Bearer ${jwt}`}})
           .then(response => {
             console.log(response.data)
-          // navigate('profile')
           }).catch(error => {
             console.log(error)
         })

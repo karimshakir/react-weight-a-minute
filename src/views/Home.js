@@ -13,6 +13,7 @@ submitWeight = () => {
     axios
       .post('/weights', { value: value }, { headers: { 'Authorization': `Bearer ${jwt}`}})
       .then(data => {
+        console.log(data.data)
       navigate('profile')
       }).catch(error => {
         console.log(error)

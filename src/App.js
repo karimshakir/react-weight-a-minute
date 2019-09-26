@@ -3,6 +3,7 @@ import Home from './views/Home';
 import Login from './views/Login';
 import Profile from './views/Profile';
 import Teams from './views/Teams'
+import LeaderBoard from './views/LeaderBoard'
 import { Router, Link, Redirect } from "@reach/router";
 import axios from 'axios';
 import './App.css';
@@ -64,6 +65,7 @@ class App extends React.Component {
         <nav>
           <Link to="/">Home</Link>
           <Link to="/teams">Teams</Link>
+          <Link to="/leaderboard">Leader Board</Link>
           <button onClick={this.logout} >Logout</button>
         </nav>
            
@@ -83,6 +85,10 @@ class App extends React.Component {
           <PrivateRoute path='profile' 
             isLoggedIn={this.state.isLoggedIn} 
             component={Profile} />   
+
+          <PrivateRoute path='leaderboard' 
+          isLoggedIn={this.state.isLoggedIn} 
+          component={LeaderBoard} /> 
         </Router>
 
       </div>

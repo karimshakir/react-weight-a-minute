@@ -15,6 +15,7 @@ class Home extends React.Component {
     axios
       .post('/weights', { value: value }, { headers: { 'Authorization': `Bearer ${jwt}`}})
       .then(data => {
+        console.log(data.data)
       }).catch(error => {
         console.log(error)
     })
