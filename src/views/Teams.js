@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import LeaderBoard from './LeaderBoard'
+import Leaderboard from './Leaderboard'
 import TeamsList from '../components/TeamsList'
 import { navigate } from "@reach/router";
 
@@ -15,7 +15,8 @@ class Teams extends React.Component {
     const jwt = localStorage.getItem('jwt');
     axios.get('/teams', { headers: { 'Authorization': `Bearer ${jwt}`}})
       .then(response => {
-        this.setState({ teams: response.data})
+        console.log(response.data)
+        this.setState({ teams: response.data })
       })
   }
   

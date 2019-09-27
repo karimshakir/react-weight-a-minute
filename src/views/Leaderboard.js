@@ -9,12 +9,11 @@ class LeaderBoard extends React.Component {
 
   componentDidMount() {
     const jwt = localStorage.getItem('jwt');
-    axios.get('/rank', { headers: { 'Authorization': `Bearer ${jwt}`}})
+    axios.get('/players', { headers: { 'Authorization': `Bearer ${jwt}`}})
       .then(response => {
         console.log(response.data)
       })
   }
-
 
   render() {
   return true

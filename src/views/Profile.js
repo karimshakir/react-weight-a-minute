@@ -26,11 +26,11 @@ class Profile extends React.Component{
         this.setState({ player: response.data })
       })
 
-    axios.get('/weights/me', { headers: { 'Authorization': `Bearer ${jwt}`}})
-      .then(response => {
-        console.log(response.data)
-        this.setState({ totalWtLoss: response.data })
-      })
+    // axios.get('/weights/me', { headers: { 'Authorization': `Bearer ${jwt}`}})
+    //   .then(response => {
+    //     console.log(response.data)
+    //     this.setState({ totalWtLoss: response.data })
+    //   })
 
   }
 

@@ -3,7 +3,7 @@ import Home from './views/Home';
 import Login from './views/Login';
 import Profile from './views/Profile';
 import Teams from './views/Teams'
-import LeaderBoard from './views/LeaderBoard'
+import Leaderboard from './views/Leaderboard'
 import { Router, Link, Redirect } from "@reach/router";
 import axios from 'axios';
 import './App.css';
@@ -88,7 +88,7 @@ class App extends React.Component {
 
           <PrivateRoute path='leaderboard' 
           isLoggedIn={this.state.isLoggedIn} 
-          component={LeaderBoard} /> 
+          component={Leaderboard} /> 
         </Router>
 
       </div>
