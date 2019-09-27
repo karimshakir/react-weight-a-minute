@@ -4,7 +4,8 @@ class LeaderBoard extends React.Component {
 
 
   state = {
-    ranking: []
+    ranking: [],
+    totalWtLoss: ''
   }
 
   componentDidMount() {

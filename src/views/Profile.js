@@ -59,7 +59,7 @@ class Profile extends React.Component{
     return (
       <div>
         <h1>PROFILE PAGE</h1>
-        <h3>Total Weight Loss: {this.state.totalWtLoss}lbs</h3>
+        <h3>Total Weight Loss: {this.state.player.total_loss}lbs</h3>
         <MostRecentWeight weights={this.state.player.weights} />
 
         <button onClick={this.toggleIndexWeights} >Weight History </button>
