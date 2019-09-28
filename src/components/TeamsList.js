@@ -2,7 +2,6 @@ import React from 'react'
 
 function TeamsList(props) {
   return(
-
     props.theTeams ? 
     props.theTeams.map((theTeam, i) => {
       

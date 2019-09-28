@@ -7,8 +7,11 @@ function MyTeams (props) {
       return (
         <div key={i}>
             <p>{team.name}</p>
-            <p>{i}</p>
             <button onClick={() => props.handleClick(team.id)}>Leave Team</button>
+            <div>
+              <br></br>
+              <br></br> 
+            </div>
         </div>
       )
     }) : null

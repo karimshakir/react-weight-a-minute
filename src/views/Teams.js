@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import Leaderboard from './Leaderboard'
 import TeamsList from '../components/TeamsList'
 import { navigate } from "@reach/router";
 
@@ -13,7 +12,7 @@ class Teams extends React.Component {
 
   componentDidMount() {
     const jwt = localStorage.getItem('jwt');
-    axios.get('/teams', { headers: { 'Authorization': `Bearer ${jwt}`}})
+    axios.get('/availableTeams', { headers: { 'Authorization': `Bearer ${jwt}`}})
       .then(response => {
         console.log(response.data)
         this.setState({ teams: response.data })
@@ -55,10 +54,19 @@ class Teams extends React.Component {
       <div>
         <h1>TEAM PAGE</h1>  
         <h2>Create A Team</h2>  
-        <input id="enter-team" value={this.state.newTeamName} onChange={this.handleChange} />
+        <input 
+          id="enter-team" 
+          value={this.state.newTeamName} 
+          onChange={this.handleChange} />
+
         <button onClick={this.submitTeam}>Submit</button>
+
         <h2>Join A Team</h2>  
-        <TeamsList  handleClick={this.joinTeam} showTeams={this.state.showTeams} theTeams={this.state.teams}  />
+
+        <TeamsList  
+          handleClick={this.joinTeam}
+          showTeams={this.state.showTeams}
+          theTeams={this.state.teams}  />
 
       </div>
             )
