@@ -8,7 +8,6 @@ class LeaderBoard extends React.Component {
     players: null,
     totalWtLoss: ''
   }
-
   componentDidMount() {
     const jwt = localStorage.getItem('jwt');
     axios.get('/players', { headers: { 'Authorization': `Bearer ${jwt}`}})
@@ -17,7 +16,6 @@ class LeaderBoard extends React.Component {
         this.setState({players: response.data })
       })
   }
-
     render(){
     if (!this.state.players) {
       return null;
