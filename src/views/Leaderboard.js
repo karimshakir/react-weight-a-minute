@@ -2,14 +2,17 @@ import React from 'react'
 import axios from 'axios'
 import Teams from './Teams'
 import TeamsList from '../components/TeamsList'
+import SelectTeam from '../components/SelectTeam'
 import GlobalRankings from '../components/GlobalRankings'
 
 class LeaderBoard extends React.Component {
 
   state = {
+    teams: [],
     players: null,
     totalWtLoss: '',
-    showTeams: false
+    showTeams: false,
+
   }
   componentDidMount() {
     const jwt = localStorage.getItem('jwt');
@@ -40,14 +43,14 @@ class LeaderBoard extends React.Component {
       <div>
         <h1>Leader Board</h1>
         <GlobalRankings
-         playerInfo={this.state.players}
-         teams={this.state.teams} />
-      <h2>Choose A Team</h2>
-      <button onClick={this.showTeams} >Show Teams</button>
-         <TeamsList  
+          playerInfo={this.state.players}
           showTeams={this.state.showTeams}
           theTeams={this.state.teams}  />
-
+        <button onClick={this.showTeams} >Show Teams</button>
+        <SelectTeam
+          handleClick={this.joinTeam}
+          showTeams={this.state.showTeams}
+          theTeams={this.state.teams}  />    
       </div>
             )
           }
