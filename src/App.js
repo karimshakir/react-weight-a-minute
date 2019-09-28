@@ -66,6 +66,7 @@ class App extends React.Component {
           <Link to="/">Home</Link>
           <Link to="/teams">Teams</Link>
           <Link to="/leaderboard">Leader Board</Link>
+          <Link to="/profile">Profile</Link>
           <button onClick={this.logout} >Logout</button>
         </nav>
            
@@ -90,7 +91,6 @@ class App extends React.Component {
           isLoggedIn={this.state.isLoggedIn} 
           component={Leaderboard} /> 
         </Router>
-
       </div>
     )
   }

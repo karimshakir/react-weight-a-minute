@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Weights from '../components/Weights'
-
+import MyRank from '../components/MyRank'
 import MostRecentWeight from '../components/MostRecentWeight'
 import MyTeams from '../components/MyTeams'
 import { navigate } from "@reach/router";
@@ -25,13 +25,6 @@ class Profile extends React.Component{
         console.log(response.data)
         this.setState({ player: response.data })
       })
-
-    // axios.get('/weights/me', { headers: { 'Authorization': `Bearer ${jwt}`}})
-    //   .then(response => {
-    //     console.log(response.data)
-    //     this.setState({ totalWtLoss: response.data })
-    //   })
-
   }
 
   leaveTeam = (theTeamId) => {

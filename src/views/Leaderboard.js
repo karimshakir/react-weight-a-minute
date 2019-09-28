@@ -1,10 +1,11 @@
 import React from 'react'
 import axios from 'axios'
+import GlobalRankings from '../components/GlobalRankings'
+
 class LeaderBoard extends React.Component {
 
-
   state = {
-    ranking: [],
+    players: null,
     totalWtLoss: ''
   }
 
@@ -13,12 +14,22 @@ class LeaderBoard extends React.Component {
     axios.get('/players', { headers: { 'Authorization': `Bearer ${jwt}`}})
       .then(response => {
         console.log(response.data)
+        this.setState({players: response.data })
       })
   }
 
-  render() {
-  return true
-  } 
+    render(){
+    if (!this.state.players) {
+      return null;
+    }
+    return (
+      <div>
+        <h1>Leader Board</h1>
+
+        <GlobalRankings playerInfo={this.state.players}/>
+      </div>
+            )
+          }
 }
 
 export default LeaderBoard
