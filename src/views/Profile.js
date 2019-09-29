@@ -1,10 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import Weights from '../components/Weights'
-import MyRank from '../components/MyRank'
 import MostRecentWeight from '../components/MostRecentWeight'
 import MyTeams from '../components/MyTeams'
-import { navigate } from "@reach/router";
+
 
 class Profile extends React.Component{
 
@@ -35,7 +34,6 @@ class Profile extends React.Component{
         window.location.reload(false);
       })
     }
-
 
   toggleIndexWeights = () => {
     this.setState({showAllWeights:!this.state.showAllWeights})

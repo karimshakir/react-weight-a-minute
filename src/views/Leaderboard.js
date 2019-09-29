@@ -1,7 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-import Teams from './Teams'
-import TeamsList from '../components/TeamsList'
 import SelectTeam from '../components/SelectTeam'
 import GlobalRankings from '../components/GlobalRankings'
 
@@ -12,14 +10,13 @@ class LeaderBoard extends React.Component {
     players: null,
     totalWtLoss: '',
     showTeams: false,
-
+    leaders: []
   }
   componentDidMount() {
     const jwt = localStorage.getItem('jwt');
     axios.get('/players', { headers: { 'Authorization': `Bearer ${jwt}`}})
       .then(response => {
         console.log(response.data)
-        this.setState({players: response.data })
       })
 
     axios.get('/teams', { headers: { 'Authorization': `Bearer ${jwt}`}})
@@ -29,26 +26,33 @@ class LeaderBoard extends React.Component {
       })
   }
 
-  showTeams = () => {
-    this.setState({showTeams: !this.state.showTeams})
+    showTeams = () => {
+      this.setState({showTeams: !this.state.showTeams})
+    }
+
+
+  ranked_players_of_selectedTeam = (theTeamId) => {
+    const jwt = localStorage.getItem('jwt');
+    axios.get('/rank/' + theTeamId,
+      { headers: { 'Authorization': `Bearer ${jwt}`}})
+      .then(response => {
+        console.log(response.data)
+        this.setState({ leaders: response.data })
+      })  
   }
 
-
-
-    render(){
-    if (!this.state.players) {
-      return null;
-    }
+    render() {
     return (
       <div>
         <h1>Leader Board</h1>
-        <GlobalRankings
-          playerInfo={this.state.players}
+        
+<GlobalRankings
+          leaders={this.state.leaders}
           showTeams={this.state.showTeams}
           theTeams={this.state.teams}  />
         <button onClick={this.showTeams} >Show Teams</button>
         <SelectTeam
-          handleClick={this.joinTeam}
+          handleClick={this.ranked_players_of_selectedTeam}
           showTeams={this.state.showTeams}
           theTeams={this.state.teams}  />    
       </div>
@@ -57,4 +61,3 @@ class LeaderBoard extends React.Component {
 }
 
 export default LeaderBoard
-

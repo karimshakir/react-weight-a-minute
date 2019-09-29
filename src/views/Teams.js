@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import TeamsList from '../components/TeamsList'
-import { navigate } from "@reach/router";
 
 class Teams extends React.Component {
   state = {
@@ -32,7 +31,6 @@ class Teams extends React.Component {
       window.location.reload();
   }
 
-
     joinTeam = (theTeamId) => {
         const jwt = localStorage.getItem('jwt')
         axios
@@ -49,7 +47,6 @@ class Teams extends React.Component {
   }
 
   render(){
-
     return (
       <div>
         <h1>TEAM PAGE</h1>  
