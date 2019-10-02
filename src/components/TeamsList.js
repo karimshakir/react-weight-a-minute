@@ -11,7 +11,7 @@ function TeamsList(props) {
             <button onClick={() => props.handleClick(theTeam.id)}>Join Team</button>
           </div>
         )
-      }): <p>No existing Teams</p>
+      }): false
     )
 }
 export default TeamsList

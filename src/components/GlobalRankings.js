@@ -5,10 +5,10 @@ function GlobalRankings (props) {
     props.leaders.map((leader, i) => {
       return (
         <div key={i}>
-            <p>Rank: #{i + 1}, Player:{leader.name}</p>
+            <p>Rank: #{i + 1}, Player:{leader.name},Total Weight Loss: {leader.wt_loss}lbs</p>
         </div>
       )
-    }) : <p>No Player Info yet</p>
+    }) : <p>Choose Team Below</p>
     )
   }
 

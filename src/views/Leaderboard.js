@@ -27,6 +27,9 @@ class LeaderBoard extends React.Component {
   }
 
     showTeams = () => {
+      if (this.state.showTeams.length <= 0){
+        return <p>No Teams Exist Yet></p>
+      }
       this.setState({showTeams: !this.state.showTeams})
     }
 
@@ -49,7 +52,8 @@ class LeaderBoard extends React.Component {
 <GlobalRankings
           leaders={this.state.leaders}
           showTeams={this.state.showTeams}
-          theTeams={this.state.teams}  />
+          theTeams={this.state.teams} 
+          thePlayers={this.state.players} />
         <button onClick={this.showTeams} >Show Teams</button>
         <SelectTeam
           handleClick={this.ranked_players_of_selectedTeam}

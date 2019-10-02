@@ -10,7 +10,7 @@ function SelectTeam(props){
             <button onClick={() => props.handleClick(theTeam.id)}>Select Team</button>
           </div>
         )
-      }): <p>No existing Teams</p> 
+      }): false
     )
 }
 
