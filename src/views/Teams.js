@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import TeamsList from '../components/TeamsList'
+import { navigate } from '@reach/router'
 
 class Teams extends React.Component {
   state = {
@@ -25,10 +26,10 @@ class Teams extends React.Component {
       .post('/teams', { name: value }, { headers: { 'Authorization': `Bearer ${jwt}`}})
       .then(response => {
         console.log(response.data)
+        window.location.reload();
       }).catch(error => {
         console.log(error)
     })
-      window.location.reload();
   }
 
     joinTeam = (theTeamId) => {

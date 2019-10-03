@@ -10,7 +10,8 @@ class LeaderBoard extends React.Component {
     players: null,
     totalWtLoss: '',
     showTeams: false,
-    leaders: []
+    leaders: [],
+    selectedTeamName:''
   }
   componentDidMount() {
     const jwt = localStorage.getItem('jwt');
@@ -25,15 +26,12 @@ class LeaderBoard extends React.Component {
         this.setState({ teams: response.data })
       })
   }
-
     showTeams = () => {
       if (this.state.showTeams.length <= 0){
         return <p>No Teams Exist Yet></p>
       }
       this.setState({showTeams: !this.state.showTeams})
     }
-
-
   ranked_players_of_selectedTeam = (theTeamId) => {
     const jwt = localStorage.getItem('jwt');
     axios.get('/rank/' + theTeamId,
@@ -41,7 +39,14 @@ class LeaderBoard extends React.Component {
       .then(response => {
         console.log(response.data)
         this.setState({ leaders: response.data })
-      })  
+      })
+
+      axios.get('/selectedTeam/' + theTeamId,
+      { headers: { 'Authorization': `Bearer ${jwt}`}})
+      .then(response => {
+        console.log(response.data[0].name)
+        this.setState({ selectedTeamName: response.data[0].name })
+      })    
   }
 
     render() {
