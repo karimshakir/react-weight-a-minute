@@ -14,7 +14,8 @@ class Profile extends React.Component{
     showAllWeights: false,
     showMyTeams: false,
     MyTeams:[],
-    totalWtLoss: ''
+    totalWtLoss: '',
+    myWeights: []
   }
 
   componentDidMount() {
@@ -23,6 +24,12 @@ class Profile extends React.Component{
       .then(response => {
         console.log(response.data)
         this.setState({ player: response.data })
+      })
+
+    axios.get('/weights', { headers: { 'Authorization': `Bearer ${jwt}`}})
+      .then(response => {
+        console.log(response.data)
+        this.setState({ myWeights: response.data })
       })
   }
 
@@ -55,7 +62,7 @@ class Profile extends React.Component{
 
         <button onClick={this.toggleIndexWeights} >Weight History </button>
 
-        <Weights weights={this.state.player.weights}
+        <Weights weights={this.state.myWeights}
          showAllWeights={this.state.showAllWeights}
          weightLost={this.state.player.weightlost} /> 
 
@@ -71,3 +78,7 @@ class Profile extends React.Component{
 export default Profile;
 
 
+        
+        // <Weights weights={this.state.player.weights}
+        //  showAllWeights={this.state.showAllWeights}
+        //  weightLost={this.state.player.weightlost} /> 

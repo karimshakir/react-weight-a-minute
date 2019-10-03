@@ -6,7 +6,7 @@ function MostRecentWeight(props) {
       Current Weight:
       {
         props.weights.length 
-          ? <span> { props.weights[0].value } </span>
+          ? <span> { props.weights[0].value }lbs </span>
           : <span> no weights entered </span>
       }
     </p>

@@ -6,7 +6,7 @@ function Weights(props) {
     props.weights.map((weight, i) => {
       if (i > 0) {
         return (
-          <p key={weight.id}> {weight.value} </p>
+          <p key={weight.id}> {weight.value}lbs, {weight.date} </p>
         )
       }
       return null;
@@ -14,7 +14,9 @@ function Weights(props) {
     props.weights.map((weight, i) => {
       if (i > 0 && i < 3) {
         return (
-          <p key={weight.id}> {weight.value} </p>
+          <p key={weight.id}> {weight.value}lbs, {weight.date} </p>
+
+
         )
       }
       return null;
@@ -22,3 +24,26 @@ function Weights(props) {
   )
 }
 export default Weights
+
+// function Weights(props) {
+//   return (
+//     props.showAllWeights ? 
+//     props.weights.map((weight, i) => {
+//       if (i > 0) {
+//         return (
+//           <p key={weight.id}> {weight.value}lbs </p>
+//         )
+//       }
+//       return null;
+//     }) :
+//     props.weights.map((weight, i) => {
+//       if (i > 0 && i < 3) {
+//         return (
+//           <p key={weight.id}> {weight.value} </p>
+
+//         )
+//       }
+//       return null;
+//     })
+//   )
+// }
