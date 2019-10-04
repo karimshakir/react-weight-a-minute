@@ -22,14 +22,24 @@ class Profile extends React.Component{
     const jwt = localStorage.getItem('jwt');
     axios.get('/players/me', { headers: { 'Authorization': `Bearer ${jwt}`}})
       .then(response => {
-        console.log(response.data)
+        // console.log(response.data)
         this.setState({ player: response.data })
       })
 
     axios.get('/weights', { headers: { 'Authorization': `Bearer ${jwt}`}})
       .then(response => {
-        console.log(response.data)
+        // console.log(response.data)
         this.setState({ myWeights: response.data })
+      })
+  }
+
+  myRank_of_selectedTeam = (theTeamId) => {
+    const jwt = localStorage.getItem('jwt');
+    axios.get('/myrank/' + theTeamId,
+      { headers: { 'Authorization': `Bearer ${jwt}`}})
+      .then(response => {
+        console.log(response.data)
+        this.setState({ leaders: response.data })
       })
   }
 
@@ -37,7 +47,7 @@ class Profile extends React.Component{
     const jwt = localStorage.getItem('jwt');
     axios.delete('/enrollments/' + theTeamId, { headers: { 'Authorization': `Bearer ${jwt}`}})
       .then(response => {
-        console.log(response.data)
+        // console.log(response.data)
         window.location.reload(false);
       })
     }
@@ -69,6 +79,7 @@ class Profile extends React.Component{
         <button onClick={this.showMyTeams} >MyTeams</button>
 
         <MyTeams handleClick={this.leaveTeam}
+           handleClick2={this.myRank_of_selectedTeam}
            showMyTeams={this.state.showMyTeams}
            myTeams={this.state.player.teams} />
       </div>

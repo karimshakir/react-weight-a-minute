@@ -25,8 +25,9 @@ class Teams extends React.Component {
     axios
       .post('/teams', { name: value }, { headers: { 'Authorization': `Bearer ${jwt}`}})
       .then(response => {
-        console.log(response.data)
-        window.location.reload();
+        const teams = this.state.teams.slice();
+        teams.push(response.data);
+        this.setState({ teams: teams })
       }).catch(error => {
         console.log(error)
     })

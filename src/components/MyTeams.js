@@ -6,8 +6,9 @@ function MyTeams (props) {
     props.myTeams.map((team, i) => {
       return (
         <div key={i}>
-            <p>{team.name}</p>
+            <p>{team.name} <span>Rank: {team.rank}</span></p>
             <button onClick={() => props.handleClick(team.id)}>Leave Team</button>
+
             <div>
               <br></br>
               <br></br> 

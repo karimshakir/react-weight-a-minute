@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './views/Home';
 import Login from './views/Login';
+import SignUp from './views/SignUp';
 import Profile from './views/Profile';
 import Teams from './views/Teams'
 import Leaderboard from './views/Leaderboard'
@@ -51,6 +52,21 @@ class App extends React.Component {
     })
   }
 
+  signup = () => {
+    const name = document.getElementById("name").value
+    axios
+      .post('/players', { name: name })
+      .then(data => {
+        const jwt = data.data.jwt
+        localStorage.setItem('jwt', jwt);
+        
+        this.setState({ isLoggedIn: true });
+      }).catch(error => {
+        console.log(error.response.data.errors);
+        this.setState({ isLoggedIn: false })
+    })
+  }
+
   logout = () => {
     localStorage.clear();
     this.setState({ isLoggedIn: false });
@@ -58,39 +74,63 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-      
-        <h1>WEIGHT - A - MINUTE</h1>
-
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/teams">Teams</Link>
-          <Link to="/leaderboard">Leader Board</Link>
-          <Link to="/profile">Profile</Link>
-          <button onClick={this.logout} >Logout</button>
+      <div>  
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <a className="navbar-brand" href="#">WEIGHT - A - MINUTE</a>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <div className="navbar-nav">
+              <div className="nav-item nav-link">
+                <Link to="/">Home</Link>
+              </div>
+              <div className="nav-item nav-link">
+                <Link to="/teams">Teams</Link>
+              </div>
+              <div className="nav-item nav-link">
+                <Link to="/leaderboard">Leader Board</Link>
+              </div>
+              <div className="nav-item nav-link">
+                <Link to="/profile">Profile</Link>
+              </div>
+              {this.state.isLoggedIn && (
+                <div className="nav-item nav-link">
+                  <div onClick={this.logout} >Logout</div>
+                </div>
+              )}
+            </div>
+          </div>
         </nav>
-           
-        <Router>
-          <Login path="login" 
-            isLoggedIn={this.state.isLoggedIn} 
-            handleLogin={this.login} />
 
-          <PrivateRoute path='teams'
-            isLoggedIn={this.state.isLoggedIn} 
-            component={Teams} />
+        <div className="container">
+          <Router>
+            <Login path="login" 
+              isLoggedIn={this.state.isLoggedIn} 
+              handleLogin={this.login} />
 
-          <PrivateRoute path='/' 
-            isLoggedIn={this.state.isLoggedIn} 
-            component={Home} />
+            <SignUp path="signup" 
+              isLoggedIn={this.state.isLoggedIn} 
+              handleSignup={this.signup}
+            />
 
-          <PrivateRoute path='profile' 
-            isLoggedIn={this.state.isLoggedIn} 
-            component={Profile} />   
+            <PrivateRoute path='teams'
+              isLoggedIn={this.state.isLoggedIn} 
+              component={Teams} />
 
-          <PrivateRoute path='leaderboard' 
-          isLoggedIn={this.state.isLoggedIn} 
-          component={Leaderboard} /> 
-        </Router>
+            <PrivateRoute path='/' 
+              isLoggedIn={this.state.isLoggedIn} 
+              component={Home} />
+
+            <PrivateRoute path='profile' 
+              isLoggedIn={this.state.isLoggedIn} 
+              component={Profile} />   
+
+            <PrivateRoute path='leaderboard' 
+            isLoggedIn={this.state.isLoggedIn} 
+            component={Leaderboard} /> 
+          </Router>
+        </div>
       </div>
     )
   }

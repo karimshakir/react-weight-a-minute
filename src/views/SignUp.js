@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect, Link } from "@reach/router";
 
-class Login extends React.Component {
+class SignUp extends React.Component {
 
   render() {
     console.log("LoggedIn: " + this.props.isLoggedIn)
@@ -10,15 +10,15 @@ class Login extends React.Component {
     }
     return (
       <div>
-        <h1> Login </h1>
+        <h1> SignUp </h1>
         <input id="name" />
-        <button onClick={this.props.handleLogin}>Login</button>
+        <button onClick={this.props.handleSignup}>SignUp</button>
         <br />
-        <Link to="/signup">Sign Up</Link>
+        <Link to="/login">Login</Link>
       </div>
     )
   }
 }
 
 
-export default Login;
+export default SignUp;
