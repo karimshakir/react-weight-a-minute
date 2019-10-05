@@ -89,7 +89,4 @@ class Profile extends React.Component{
 export default Profile;
 
 
-        
-        // <Weights weights={this.state.player.weights}
-        //  showAllWeights={this.state.showAllWeights}
-        //  weightLost={this.state.player.weightlost} /> 
+  

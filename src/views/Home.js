@@ -28,7 +28,7 @@ submitWeight = () => {
     return (
        <div>
         <h1> Enter Weight </h1>
-        <input id="enter-weight" value={this.state.currentWeight} onChange={this.handleChange}/>
+        <input onChange={this.handleChange}/>
         <button onClick={this.submitWeight}>Submit</button>
       </div>
     )
@@ -36,4 +36,3 @@ submitWeight = () => {
 }
 
 export default Home
- 
