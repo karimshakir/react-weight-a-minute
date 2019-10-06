@@ -33,6 +33,15 @@ class Teams extends React.Component {
     })
   }
 
+    leaveTeam = (theTeamId) => {
+    const jwt = localStorage.getItem('jwt');
+    axios.delete('/enrollments/' + theTeamId, { headers: { 'Authorization': `Bearer ${jwt}`}})
+      .then(response => {
+        const teamsLocal = this.state.teams.slice()
+        this.setState({ teams: teamsLocal})
+      })
+    }
+
     joinTeam = (theTeamId) => {
         const jwt = localStorage.getItem('jwt')
         axios
@@ -64,6 +73,7 @@ class Teams extends React.Component {
 
         <TeamsList  
           handleClick={this.joinTeam}
+          handleClick2={this.leaveTeam}
           showTeams={this.state.showTeams}
           theTeams={this.state.teams}  />
 
