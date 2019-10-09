@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Alert from '../components/Alert'
 import TeamsList from '../components/TeamsList'
 
 class Teams extends React.Component {
@@ -7,6 +8,7 @@ class Teams extends React.Component {
     teams:[],
     newTeamName: '',
     showTeams: false,
+    alert: ''
   }
 
   componentDidMount() {
@@ -21,16 +23,27 @@ class Teams extends React.Component {
   submitTeam = () => {
     const value = this.state.newTeamName;
     const jwt = localStorage.getItem('jwt')
+    if(value) {
     axios
       .post('/teams', { name: value }, { headers: { 'Authorization': `Bearer ${jwt}`}})
       .then(response => {
+        const newTeam = response.data
+        newTeam.joined = !newTeam.joined;
         const teamsLocal = this.state.teams.slice();
-        teamsLocal.push(response.data);
+        teamsLocal.push(newTeam);
         this.setState({ teams: teamsLocal })
+         value = ''
       }).catch(error => {
-        console.log(error)
-    })
+          console.log(error)
+        })
+      } else {
+      console.log("Team Cannot Be Blank")
+      this.setState({ alert: "Team Cannot Be Blank"})
+    }
   }
+
+
+      
 
   leaveTeam = (theTeamId) => {
     const jwt = localStorage.getItem('jwt');
@@ -80,11 +93,11 @@ class Teams extends React.Component {
       <div className="list-group">{
       <div>
         <h1>TEAM PAGE</h1>  
+        <Alert alert={this.state.alert}/>
         <input 
           id="enter-team" 
           value={this.state.newTeamName} 
           onChange={this.handleChange} />
-
         <button className="btn btn-primary" onClick={this.submitTeam}>Submit</button>
         <br></br>
         <br></br>
