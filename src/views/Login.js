@@ -12,7 +12,7 @@ class Login extends React.Component {
       <div>
         <h1> Login </h1>
         <input id="name" />
-        <button onClick={this.props.handleLogin}>Login</button>
+        <button className="btn btn-primary" onClick={this.props.handleLogin}>Login</button>
         <br />
         <Link to="/signup">Sign Up</Link>
       </div>

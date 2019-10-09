@@ -7,7 +7,7 @@ function SelectTeam(props){
         return (
           <div key={theTeam.id}>
             <p >{theTeam.name} </p>
-            <button onClick={() => props.handleClick(theTeam.id)}>Select Team</button>
+            <button className="btn btn-primary" onClick={() => props.handleClick(theTeam.id)}>Select Team</button>
           </div>
         )
       }): false

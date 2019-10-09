@@ -9,7 +9,6 @@ class Profile extends React.Component{
 
   state = {
     player: null,
-    weightHistory: [],
     errors: [],
     showAllWeights: false,
     showMyTeams: false,
@@ -70,13 +69,13 @@ class Profile extends React.Component{
         <h3>Total Weight Loss: {this.state.player.total_loss}lbs</h3>
         <MostRecentWeight weights={this.state.player.weights} />
 
-        <button onClick={this.toggleIndexWeights} >Weight History </button>
+        <button className="btn btn-primary" onClick={this.toggleIndexWeights} >Weight History </button>
 
         <Weights weights={this.state.myWeights}
          showAllWeights={this.state.showAllWeights}
          weightLost={this.state.player.weightlost} /> 
 
-        <button onClick={this.showMyTeams} >MyTeams</button>
+        <button className="btn btn-primary" onClick={this.showMyTeams} >MyTeams</button>
 
         <MyTeams handleClick={this.leaveTeam}
            handleClick2={this.myRank_of_selectedTeam}

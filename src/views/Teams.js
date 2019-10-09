@@ -1,13 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import TeamsList from '../components/TeamsList'
-import { navigate } from '@reach/router'
 
 class Teams extends React.Component {
   state = {
     teams:[],
     newTeamName: '',
-    showTeams: false
+    showTeams: false,
   }
 
   componentDidMount() {
@@ -33,12 +32,21 @@ class Teams extends React.Component {
     })
   }
 
-    leaveTeam = (theTeamId) => {
+  leaveTeam = (theTeamId) => {
     const jwt = localStorage.getItem('jwt');
     axios.delete('/enrollments/' + theTeamId, { headers: { 'Authorization': `Bearer ${jwt}`}})
       .then(response => {
-        const teamsLocal = this.state.teams.slice()
-        this.setState({ teams: teamsLocal})
+        const teamsLocal = this.state.teams.map(team => {
+          if (team.id === theTeamId) {
+            team.joined = !team.joined;
+          }
+          return team
+        });
+
+        this.setState({ teams: teamsLocal })
+        this.setState({ joinedTeam: false })
+        console.log('joinedTeam: ' + this.state.joinedTeam)
+
       })
     }
 
@@ -47,7 +55,17 @@ class Teams extends React.Component {
         axios
           .post('/enrollments', { team_id: theTeamId }, { headers: { 'Authorization': `Bearer ${jwt}`}})
           .then(response => {
-            console.log(response.data)
+            const teamsLocal = this.state.teams.map(team => {
+              if (team.id === theTeamId) {
+                team.joined = !team.joined;
+              }
+              return team
+            });
+            this.setState({
+              teams: teamsLocal,
+            })
+            console.log('joinedTeam: ' + this.state.joinedTeam)
+
           }).catch(error => {
             console.log(error)
         })
@@ -59,25 +77,27 @@ class Teams extends React.Component {
 
   render(){
     return (
+      <div className="list-group">{
       <div>
         <h1>TEAM PAGE</h1>  
-        <h2>Create A Team</h2>  
         <input 
           id="enter-team" 
           value={this.state.newTeamName} 
           onChange={this.handleChange} />
 
-        <button onClick={this.submitTeam}>Submit</button>
-
-        <h2>Join A Team</h2>  
-
+        <button className="btn btn-primary" onClick={this.submitTeam}>Submit</button>
+        <br></br>
+        <br></br>
+        <br></br>
         <TeamsList  
-          handleClick={this.joinTeam}
-          handleClick2={this.leaveTeam}
+          handleJoinTeam={this.joinTeam}
+          handleLeaveTeam={this.leaveTeam}
           showTeams={this.state.showTeams}
-          theTeams={this.state.teams}  />
+          theTeams={this.state.teams}
+          joinedTeam={this.state.joinedTeam}  />
 
       </div>
+    }</div>
             )
           }
         }

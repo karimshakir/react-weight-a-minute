@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import SelectTeam from '../components/SelectTeam'
+import MyRank from '../components/MyRank'
 import GlobalRankings from '../components/GlobalRankings'
 
 class LeaderBoard extends React.Component {
@@ -59,11 +60,12 @@ class LeaderBoard extends React.Component {
           showTeams={this.state.showTeams}
           theTeams={this.state.teams} 
           thePlayers={this.state.players} />
-        <button onClick={this.showTeams} >Show Teams</button>
+        <button className="btn btn-primary" onClick={this.showTeams} >Show Teams</button>
         <SelectTeam
           handleClick={this.ranked_players_of_selectedTeam}
           showTeams={this.state.showTeams}
-          theTeams={this.state.teams}  />    
+          theTeams={this.state.teams}  /> 
+          <MyRank />   
       </div>
             )
           }
