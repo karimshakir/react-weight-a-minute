@@ -32,7 +32,8 @@ class Teams extends React.Component {
         const teamsLocal = this.state.teams.slice();
         teamsLocal.push(newTeam);
         this.setState({ teams: teamsLocal })
-         value = ''
+        this.setState({newTeamName: ''})
+        this.value = this.state.newTeamName
       }).catch(error => {
           console.log(error)
         })
@@ -41,9 +42,6 @@ class Teams extends React.Component {
       this.setState({ alert: "Team Cannot Be Blank"})
     }
   }
-
-
-      
 
   leaveTeam = (theTeamId) => {
     const jwt = localStorage.getItem('jwt');
@@ -55,11 +53,9 @@ class Teams extends React.Component {
           }
           return team
         });
-
         this.setState({ teams: teamsLocal })
         this.setState({ joinedTeam: false })
         console.log('joinedTeam: ' + this.state.joinedTeam)
-
       })
     }
 
@@ -84,8 +80,10 @@ class Teams extends React.Component {
         })
       }
 
+
   handleChange = (event) => {
     this.setState({newTeamName: event.target.value})
+    event.target.value = ''
   }
 
   render(){
