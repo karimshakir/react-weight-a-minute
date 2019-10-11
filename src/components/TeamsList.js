@@ -19,7 +19,13 @@ function TeamsList(props) {
                     onClick={() => props.handleJoinTeam(theTeam.id)}
                   >+</button>
                 }
-                <span className="ml-4">{theTeam.name}</span>
+                <span className="ml-4">
+                  {theTeam.name}
+                  {
+                    theTeam.joined &&
+                      <span> (Rank: {theTeam.rank}) </span>
+                  }
+                </span>
               </div>         
             </div>
           )

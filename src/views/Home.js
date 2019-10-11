@@ -6,7 +6,7 @@ import { navigate } from "@reach/router";
 class Home extends React.Component {
    state = {
     currentWeight: '',
-    alert:''
+    alert: []
   }
 
 submitWeight = () => {
@@ -23,7 +23,7 @@ submitWeight = () => {
     })
     } else {
       console.log("Weight Cannot Be Blank")
-      this.setState({ alert: "Weight Cannot Be Blank"})
+      this.setState({ alert: ["Weight Cannot Be Blank"]})
     }
   }
 

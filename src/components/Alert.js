@@ -1,14 +1,15 @@
 import React from 'react'
-  function Alert(props) {
-    if (props.alert) {
-      return (
-        <div className="alert alert-danger" role="alert">
-              {props.alert}
-        </div>
-      )
-    } else {
-      return true
-    }
+
+function Alert(props) {
+  if (props.alert.length) {
+    return (
+      <div className="alert alert-danger" role="alert">
+          {props.alert.join(', ')}
+      </div>
+    )
+  } else {
+    return null;
   }
+}
 
 export default Alert

@@ -8,7 +8,7 @@ class Teams extends React.Component {
     teams:[],
     newTeamName: '',
     showTeams: false,
-    alert: ''
+    alert: []
   }
 
   componentDidMount() {
@@ -30,16 +30,19 @@ class Teams extends React.Component {
         const newTeam = response.data
         newTeam.joined = !newTeam.joined;
         const teamsLocal = this.state.teams.slice();
-        teamsLocal.push(newTeam);
+        teamsLocal.unshift(newTeam);
         this.setState({ teams: teamsLocal })
         this.setState({newTeamName: ''})
         this.value = this.state.newTeamName
       }).catch(error => {
-          console.log(error)
+          console.log(error.response.data.errors)
+          this.setState({
+            alert: error.response.data.errors
+          })
         })
       } else {
       console.log("Team Cannot Be Blank")
-      this.setState({ alert: "Team Cannot Be Blank"})
+      this.setState({ alert: ["Team Cannot Be Blank"]})
     }
   }
 

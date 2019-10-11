@@ -33,7 +33,14 @@ class LeaderBoard extends React.Component {
       }
       this.setState({showTeams: !this.state.showTeams})
     }
-  ranked_players_of_selectedTeam = (theTeamId) => {
+  ranked_players_of_selectedTeam = (event) => {
+    const theTeamId = event.target.value;
+    if (!theTeamId) {
+      this.setState({
+        leaders: []
+      });
+      return;
+    }
     const jwt = localStorage.getItem('jwt');
     axios.get('/rank/' + theTeamId,
       { headers: { 'Authorization': `Bearer ${jwt}`}})
@@ -54,17 +61,15 @@ class LeaderBoard extends React.Component {
     return (
       <div>
         <h1>Leader Board</h1>
-        
-<GlobalRankings
-          leaders={this.state.leaders}
-          showTeams={this.state.showTeams}
-          theTeams={this.state.teams} 
-          thePlayers={this.state.players} />
-        <button className="btn btn-primary" onClick={this.showTeams} >Show Teams</button>
         <SelectTeam
           handleClick={this.ranked_players_of_selectedTeam}
           showTeams={this.state.showTeams}
           theTeams={this.state.teams}  /> 
+        <GlobalRankings
+          leaders={this.state.leaders}
+          showTeams={this.state.showTeams}
+          theTeams={this.state.teams} 
+          thePlayers={this.state.players} />
           <MyRank />   
       </div>
             )

@@ -1,17 +1,16 @@
 import React from 'react'
 function SelectTeam(props){
-  return(
-    props.showTeams ? 
-    props.theTeams.map((theTeam, i) => {
-      
-        return (
-          <div key={theTeam.id}>
-            <p >{theTeam.name} </p>
-            <button className="btn btn-primary" onClick={() => props.handleClick(theTeam.id)}>Select Team</button>
-          </div>
-        )
-      }): false
-    )
+  return (
+    <select
+      className="form-control"
+      onChange={props.handleClick}
+    >
+      <option value="">Please Select a Team</option>
+      {
+        props.theTeams.map((theTeam, i) => <option key={theTeam.id} value={theTeam.id}>{theTeam.name}</option>)
+      }
+    </select>
+  )
 }
 
 export default SelectTeam

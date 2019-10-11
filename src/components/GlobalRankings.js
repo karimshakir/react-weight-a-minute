@@ -1,4 +1,6 @@
 import React from 'react'
+import WeightLost from '../components/WeightLost'
+
 function GlobalRankings (props) {
   return (
     
@@ -8,7 +10,10 @@ function GlobalRankings (props) {
       return (
 
         <div  key={i}>
-            <p> Rank: #{i + 1}, Player:{leader.name},Total Weight Loss: {leader.wt_loss}lbs </p>
+            <p>
+              Rank: #{i + 1}, Player:{leader.name},
+              <WeightLost weight={leader.wt_loss} Tag="span" />
+            </p>
         </div>
 
       )

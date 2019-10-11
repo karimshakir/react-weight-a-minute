@@ -3,6 +3,9 @@ import axios from 'axios';
 import Weights from '../components/Weights'
 import MostRecentWeight from '../components/MostRecentWeight'
 import MyTeams from '../components/MyTeams'
+import WeightLost from '../components/WeightLost'
+import TeamsList from '../components/TeamsList'
+
 
 
 class Profile extends React.Component{
@@ -21,7 +24,7 @@ class Profile extends React.Component{
     const jwt = localStorage.getItem('jwt');
     axios.get('/players/me', { headers: { 'Authorization': `Bearer ${jwt}`}})
       .then(response => {
-        // console.log(response.data)
+        console.log(response.data)
         this.setState({ player: response.data })
       })
 
@@ -52,11 +55,17 @@ class Profile extends React.Component{
     }
 
   toggleIndexWeights = () => {
-    this.setState({showAllWeights:!this.state.showAllWeights})
+    this.setState({
+      showAllWeights:!this.state.showAllWeights,
+      showMyTeams: false
+    })
   }
 
   showMyTeams = () => {
-    this.setState({showMyTeams: !this.state.showMyTeams})
+    this.setState({
+      showMyTeams: !this.state.showMyTeams,
+      showAllWeights: false
+    })
   }
 
   render(){
@@ -66,26 +75,34 @@ class Profile extends React.Component{
     return (
       <div>
         <h1>PROFILE PAGE</h1>
-        <h3>Total Weight Loss: {this.state.player.total_loss}lbs</h3>
-        <MostRecentWeight weights={this.state.player.weights} />
 
+        <WeightLost weight={this.state.player.total_loss} Tag="h3" />
+        <MostRecentWeight weights={this.state.player.weights} />
         <button className="btn btn-primary" onClick={this.toggleIndexWeights} >Weight History </button>
+        <button className="btn btn-primary" onClick={this.showMyTeams} >MyTeams</button>
 
         <Weights weights={this.state.myWeights}
          showAllWeights={this.state.showAllWeights}
          weightLost={this.state.player.weightlost} /> 
 
-        <button className="btn btn-primary" onClick={this.showMyTeams} >MyTeams</button>
 
-        <MyTeams handleClick={this.leaveTeam}
-           handleClick2={this.myRank_of_selectedTeam}
-           showMyTeams={this.state.showMyTeams}
-           myTeams={this.state.player.teams} />
+        {this.state.showMyTeams &&
+          <TeamsList
+            theTeams={this.state.player.teams.map(team => {
+              team.joined = true;
+              return team;
+            })}
+            handleLeaveTeam={this.leaveTeam}
+            handleJoinTeam={() => {}}
+          />
+        }
       </div>
             )
           }
         }
 export default Profile;
+
+
 
 
   
