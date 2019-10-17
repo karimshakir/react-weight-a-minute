@@ -3,6 +3,7 @@ import Home from './views/Home';
 import Login from './views/Login';
 import SignUp from './views/SignUp';
 import Profile from './views/Profile';
+import Alert from './components/Alert';
 import Teams from './views/Teams'
 import Leaderboard from './views/Leaderboard'
 import { Router, Link, Redirect } from "@reach/router";
@@ -19,6 +20,7 @@ class PrivateRoute extends React.Component {
 class App extends React.Component {
   state = {
     isLoggedIn: false,
+    alert:[]
   }
 
   componentDidMount() {
@@ -40,6 +42,7 @@ class App extends React.Component {
 
   login = () => {
     const name = document.getElementById("name").value
+    if(name) {
     axios
       .post('/sessions', { name: name })
       .then(data => {
@@ -49,11 +52,20 @@ class App extends React.Component {
         this.setState({ isLoggedIn: true })
       }).catch(error => {
         this.setState({ isLoggedIn: false })
+        console.log(error.response.data.errors)
+          this.setState({
+            alert: error.response.data.errors
+      })
     })
+      } else {
+      console.log("Entry Cannot Be Blank")
+      this.setState({ alert: ["Entry Cannot Be Blank"]})
+    }
   }
 
   signup = () => {
     const name = document.getElementById("name").value
+    if (name) {
     axios
       .post('/players', { name: name })
       .then(data => {
@@ -64,7 +76,15 @@ class App extends React.Component {
       }).catch(error => {
         console.log(error.response.data.errors);
         this.setState({ isLoggedIn: false })
+        console.log(error.response.data.errors)
+          this.setState({
+            alert: error.response.data.errors
+        })
     })
+          } else {
+      console.log("Entry Cannot Be Blank")
+      this.setState({ alert: ["Entry Cannot Be Blank"]})
+    }
   }
 
   logout = () => {
@@ -86,7 +106,7 @@ class App extends React.Component {
                 <Link to="/">Home</Link>
               </div>
               <div className="nav-item nav-link">
-                <Link to="/teams">Teams</Link>
+                <Link to="/teams">Competitions</Link>
               </div>
               <div className="nav-item nav-link">
                 <Link to="/leaderboard">Leader Board</Link>
@@ -102,6 +122,7 @@ class App extends React.Component {
             </div>
           </div>
         </nav>
+              <Alert alert={this.state.alert}/>
 
         <div className="container">
           <Router>

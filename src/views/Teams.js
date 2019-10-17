@@ -93,16 +93,19 @@ class Teams extends React.Component {
     return (
       <div className="list-group">{
       <div>
-        <h1>TEAM PAGE</h1>  
+        <h1>COMPETITION PAGE</h1>  
         <Alert alert={this.state.alert}/>
+        <p>Create New Competition</p>
         <input 
           id="enter-team" 
           value={this.state.newTeamName} 
-          onChange={this.handleChange} />
+          onChange={this.handleChange}
+          placeholder="" />
         <button className="btn btn-primary" onClick={this.submitTeam}>Submit</button>
         <br></br>
         <br></br>
         <br></br>
+        <p>All Existing Competitions Are Below</p>
         <TeamsList  
           handleJoinTeam={this.joinTeam}
           handleLeaveTeam={this.leaveTeam}

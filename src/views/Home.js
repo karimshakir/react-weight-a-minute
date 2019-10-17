@@ -34,9 +34,9 @@ submitWeight = () => {
   render(){
     return (
        <div>
-          <h1> Enter Weight </h1>
+          <h1> Enter Weight(lbs)</h1>
           <Alert alert={this.state.alert}/>
-          <input onChange={this.handleChange}/>
+          <input placeholder="###" onChange={this.handleChange}/>
           <button className="btn btn-primary" onClick={this.submitWeight}>Submit</button>
       </div>
     )

@@ -2,11 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import Weights from '../components/Weights'
 import MostRecentWeight from '../components/MostRecentWeight'
-import MyTeams from '../components/MyTeams'
 import WeightLost from '../components/WeightLost'
 import TeamsList from '../components/TeamsList'
-
-
 
 class Profile extends React.Component{
 
@@ -15,9 +12,9 @@ class Profile extends React.Component{
     errors: [],
     showAllWeights: false,
     showMyTeams: false,
-    MyTeams:[],
     totalWtLoss: '',
-    myWeights: []
+    myWeights: [],
+    myTeams:[]
   }
 
   componentDidMount() {
@@ -26,6 +23,7 @@ class Profile extends React.Component{
       .then(response => {
         console.log(response.data)
         this.setState({ player: response.data })
+        this.setState({myTeams: response.data.teams.reverse()})
       })
 
     axios.get('/weights', { headers: { 'Authorization': `Bearer ${jwt}`}})
@@ -78,8 +76,8 @@ class Profile extends React.Component{
 
         <WeightLost weight={this.state.player.total_loss} Tag="h3" />
         <MostRecentWeight weights={this.state.player.weights} />
-        <button className="btn btn-primary" onClick={this.toggleIndexWeights} >Weight History </button>
-        <button className="btn btn-primary" onClick={this.showMyTeams} >MyTeams</button>
+        <button className="btn btn-primary" onClick={this.toggleIndexWeights} > My Weight History </button>
+        <button className="btn btn-primary" onClick={this.showMyTeams} >My Competitions</button>
 
         <Weights weights={this.state.myWeights}
          showAllWeights={this.state.showAllWeights}
@@ -88,7 +86,7 @@ class Profile extends React.Component{
 
         {this.state.showMyTeams &&
           <TeamsList
-            theTeams={this.state.player.teams.map(team => {
+            theTeams={this.state.myTeams.map(team => {
               team.joined = true;
               return team;
             })}

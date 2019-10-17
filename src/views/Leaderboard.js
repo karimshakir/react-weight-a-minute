@@ -27,12 +27,14 @@ class LeaderBoard extends React.Component {
         this.setState({ teams: response.data })
       })
   }
+
     showTeams = () => {
       if (this.state.showTeams.length <= 0){
         return <p>No Teams Exist Yet></p>
       }
       this.setState({showTeams: !this.state.showTeams})
     }
+
   ranked_players_of_selectedTeam = (event) => {
     const theTeamId = event.target.value;
     if (!theTeamId) {
@@ -41,6 +43,7 @@ class LeaderBoard extends React.Component {
       });
       return;
     }
+    
     const jwt = localStorage.getItem('jwt');
     axios.get('/rank/' + theTeamId,
       { headers: { 'Authorization': `Bearer ${jwt}`}})
@@ -65,6 +68,8 @@ class LeaderBoard extends React.Component {
           handleClick={this.ranked_players_of_selectedTeam}
           showTeams={this.state.showTeams}
           theTeams={this.state.teams}  /> 
+          <br></br>
+
         <GlobalRankings
           leaders={this.state.leaders}
           showTeams={this.state.showTeams}
