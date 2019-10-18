@@ -20,10 +20,10 @@ function TeamsList(props) {
                   >+</button>
                 }
                 <span className="ml-4">
+                  [Rank: {theTeam.rank}]
+                </span>
+                <span className="ml-4">
                   {theTeam.name}
-                  {
-             
-                  }
                 </span>
               </div>         
             </div>
